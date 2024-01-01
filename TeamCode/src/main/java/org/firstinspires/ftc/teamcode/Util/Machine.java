@@ -1,9 +1,12 @@
 package org.firstinspires.ftc.teamcode.util;
 
+import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 
 public class Machine {
@@ -15,7 +18,14 @@ public class Machine {
         public DcMotor frontLeft;
         public DcMotor backRight;
         public DcMotor backLeft;
+        public DcMotor angler;
         public CRServo intakeServo;
+        public CRServo higherIntakeServo;
+        public CRServo thirdIntakeServo;
+        public Servo microOne;
+        public Servo microTwo;
+        public Servo dispense;
+
         HardwareMap hardwareMap;
 
         public Machine(HardwareMap hwMap){
@@ -29,13 +39,23 @@ public class Machine {
             frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
             backRight = hardwareMap.get(DcMotor.class, "backRight");
             backLeft = hardwareMap.get(DcMotor.class, "backLeft");
+            angler = hardwareMap.get(DcMotor.class, "angler");
             intakeServo = hardwareMap.get(CRServo.class, "intakeServo");
+            higherIntakeServo = hardwareMap.get(CRServo.class, "higherIntakeServo");
+            thirdIntakeServo = hardwareMap.get(CRServo.class, "thirdIntakeServo");
+            microOne = hardwareMap.get(Servo.class, "microOne");
+            microTwo = hardwareMap.get(Servo.class, "microTwo");
+            dispense = hardwareMap.get(Servo.class, "dispense");
+
 
             //Set motor direction
             frontRight.setDirection(DcMotor.Direction.FORWARD);
-            frontLeft.setDirection(DcMotor.Direction.REVERSE);
+            frontLeft.setDirection(DcMotor.Direction.FORWARD);
             backRight.setDirection(DcMotor.Direction.FORWARD);
             backLeft.setDirection(DcMotor.Direction.REVERSE);
+
+            //Other Motor stuff
+            angler.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
             // Drivetrain motors
             backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
