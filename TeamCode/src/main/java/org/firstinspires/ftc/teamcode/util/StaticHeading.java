@@ -18,7 +18,7 @@ public class StaticHeading extends LinearOpMode {
     double Ki = PIDConstants.Ki;
     double Kd = PIDConstants.Kd;
 
-    Drivetrain drivetrain = new Drivetrain();
+    org.firstinspires.ftc.teamcode.util.Drivetrain drivetrain = new org.firstinspires.ftc.teamcode.util.Drivetrain();
 
     ElapsedTime timer = new ElapsedTime();
     private double lastError = 0;

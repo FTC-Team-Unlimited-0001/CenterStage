@@ -87,13 +87,13 @@ public class centerStageTeleop extends LinearOpMode {
                 robot.intakeServo.setDirection(CRServo.Direction.FORWARD);
                 robot.higherIntakeServo.setDirection(CRServo.Direction.FORWARD);
                 robot.thirdIntakeServo.setDirection(CRServo.Direction.FORWARD);
-                servoPower = 0.5;
+                servoPower = 0.85;
 
             }else if(gamepad2.b) {
                 robot.intakeServo.setDirection(CRServo.Direction.REVERSE);
                 robot.higherIntakeServo.setDirection(CRServo.Direction.REVERSE);
                 robot.thirdIntakeServo.setDirection(CRServo.Direction.REVERSE);
-                servoPower = 0.5;
+                servoPower = 0.85;
             }
             robot.intakeServo.setPower(servoPower);
             robot.higherIntakeServo.setPower(servoPower);
@@ -101,6 +101,8 @@ public class centerStageTeleop extends LinearOpMode {
 
             if (gamepad2.y){
                 robot.microOne.setPosition(0.5);
+                robot.microTwo.setPosition(0.5);
+
             }
         }
     }
