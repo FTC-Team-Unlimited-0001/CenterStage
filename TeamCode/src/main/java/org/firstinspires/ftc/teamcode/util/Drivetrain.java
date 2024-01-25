@@ -78,7 +78,7 @@ public class Drivetrain {
 
     public void power(double output){
         topLeftDriveMotor.setPower(output);
-        bottomLeftDriveMotor.setPower(-output);
+        bottomLeftDriveMotor.setPower(output);
         topRightDriveMotor.setPower(output);
         bottomRightDriveMotor.setPower(output);
     }
