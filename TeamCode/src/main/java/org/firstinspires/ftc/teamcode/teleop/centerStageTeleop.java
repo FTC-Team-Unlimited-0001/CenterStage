@@ -13,11 +13,14 @@ import org.firstinspires.ftc.teamcode.util.centerStageMachine;
 @Config
 @TeleOp
 public class centerStageTeleop extends LinearOpMode {
+    public static double ANGLER_POWER = 0;
+    public static double SERVO_POS = 0;
+    private PIDController controller;
+
     public static double p = 0, i=0, d=0;
     public static double f = 0;
     public static int target = 0;
-    public static double ANGLER_POWER = 0;
-    public static double SERVO_POS = 0;
+    private final double ticks = 700 / 180.0;
 
     private final FtcDashboard dashboard = FtcDashboard.getInstance();
     @Override
@@ -27,15 +30,28 @@ public class centerStageTeleop extends LinearOpMode {
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
         ElapsedTime timer = new ElapsedTime();
         telemetry.addData("status", "initalized");
+        controller = new PIDController(p, i, d);
+        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         telemetry.update();
         waitForStart();
 
         while (opModeIsActive()) {
+            //PID and telemetry
             telemetry.addData("microOnePos", robot.microOne.getPosition());
             telemetry.addData("test", robot.angler.getCurrentPosition());
             telemetry.addData("microDongPos", robot.dispense.getPosition());
             telemetry.addData("planePos", robot.planeServo.getPosition());
+            controller.setPID(p, i, d);
+            int armPos = robot.angler.getCurrentPosition();
+            double pid = controller.calculate(armPos, target);
+            double ff = Math.cos(Math.toRadians(target / ticks)) * f;
+            double power = pid + ff;
+            robot.angler.setPower(power);
+
+            telemetry.addData("armPos", armPos);
+            telemetry.addData("target", target);
             telemetry.update();
+
             //initalizing variables
             double servoPower = 0;
             robot.angler.setPower(ANGLER_POWER);
@@ -91,15 +107,6 @@ public class centerStageTeleop extends LinearOpMode {
             robot.intakeServo.setPower(servoPower);
             robot.higherIntakeServo.setPower(servoPower);
             robot.thirdIntakeServo.setPower(servoPower);
-
-            //PID for angler
-            if (gamepad2.dpad_down){
-                robot.angler.setPower(1);
-            } else if (gamepad2.dpad_up){
-                robot.angler.setPower(-1);
-            } else{
-                robot.angler.setPower(0);
             }
         }
     }
-}
