@@ -41,6 +41,7 @@ public class centerStageTeleop extends LinearOpMode {
             telemetry.addData("test", robot.angler.getCurrentPosition());
             telemetry.addData("microDongPos", robot.dispense.getPosition());
             telemetry.addData("planePos", robot.planeServo.getPosition());
+            telemetry.addData("slidePos", robot.LinearRight.getCurrentPosition());
             controller.setPID(p, i, d);
             int armPos = robot.angler.getCurrentPosition();
             double pid = controller.calculate(armPos, target);
@@ -51,6 +52,8 @@ public class centerStageTeleop extends LinearOpMode {
             telemetry.addData("armPos", armPos);
             telemetry.addData("target", target);
             telemetry.update();
+
+            int slidePos = robot.LinearRight.getCurrentPosition();
 
             //initalizing variables
             double servoPower = 0;
@@ -113,7 +116,13 @@ public class centerStageTeleop extends LinearOpMode {
             if(gamepad2.dpad_down){
                 robot.LinearLeft.setPower(-0.4);
                 robot.LinearRight.setPower(-0.4);
-            } else{
+            }
+            // else if(slidePos < ?) {
+            //       robot.LinearLeft.setPower(0);
+            //       robot.LinearRight.setPower(0);
+            // }
+
+             else{
                 robot.LinearLeft.setPower(0);
                 robot.LinearRight.setPower(0);
             }
