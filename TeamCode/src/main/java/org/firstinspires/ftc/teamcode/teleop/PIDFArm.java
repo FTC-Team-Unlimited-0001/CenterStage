@@ -7,7 +7,7 @@ import com.arcrobotics.ftclib.controller.PIDController;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.util.centerStageMachine;
+import org.firstinspires.ftc.teamcode.Util.centerStageMachine;
 @Config
 @TeleOp
 public class PIDFArm extends OpMode {

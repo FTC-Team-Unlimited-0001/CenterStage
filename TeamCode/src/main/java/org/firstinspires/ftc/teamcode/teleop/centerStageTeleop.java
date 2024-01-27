@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import org.firstinspires.ftc.teamcode.util.centerStageMachine;
+import org.firstinspires.ftc.teamcode.Util.centerStageMachine;
 
 @Config
 @TeleOp
@@ -101,6 +101,26 @@ public class centerStageTeleop extends LinearOpMode {
                 robot.higherIntakeServo.setDirection(CRServo.Direction.REVERSE);
                 robot.thirdIntakeServo.setDirection(CRServo.Direction.REVERSE);
                 servoPower = 0.5;
+            }
+            if(gamepad2.dpad_up){
+                robot.LinearLeft.setPower(0.8);
+                robot.LinearRight.setPower(0.8);
+            } else{
+                robot.LinearLeft.setPower(0);
+                robot.LinearRight.setPower(0);
+            }
+
+            if(gamepad2.dpad_down){
+                robot.LinearLeft.setPower(-0.4);
+                robot.LinearRight.setPower(-0.4);
+            } else{
+                robot.LinearLeft.setPower(0);
+                robot.LinearRight.setPower(0);
+            }
+
+
+            if(gamepad2.dpad_left){
+                robot.microOne.setPosition(50);
             }
 
             //intake power

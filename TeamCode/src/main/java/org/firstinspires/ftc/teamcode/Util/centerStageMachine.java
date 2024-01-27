@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.util;
+package org.firstinspires.ftc.teamcode.Util;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -27,6 +27,10 @@ public class centerStageMachine {
         public Servo dispense;
         public Servo planeServo;
 
+        public DcMotor LinearLeft;
+
+        public DcMotor LinearRight;
+
         HardwareMap hardwareMap;
 
         public centerStageMachine(HardwareMap hwMap){
@@ -48,6 +52,8 @@ public class centerStageMachine {
             microOne = hardwareMap.get(Servo.class, "microOne");
             microTwo = hardwareMap.get(Servo.class, "microTwo");
             dispense = hardwareMap.get(Servo.class, "dispense");
+            LinearLeft = hardwareMap.get(DcMotor.class, "LinearLeft");
+            LinearRight = hardwareMap.get(DcMotor.class, "LinearRight");
 
 
             //Set motor direction
@@ -59,6 +65,7 @@ public class centerStageMachine {
             //Other Motor stuff
             angler.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             angler.setDirection(DcMotorSimple.Direction.FORWARD);
+
 
             // Drivetrain motors
             backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
