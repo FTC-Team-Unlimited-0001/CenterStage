@@ -31,6 +31,7 @@ public class centerStageMachine {
 
         public DcMotor LinearRight;
 
+
         HardwareMap hardwareMap;
 
         public centerStageMachine(HardwareMap hwMap){
@@ -65,6 +66,8 @@ public class centerStageMachine {
             //Other Motor stuff
             angler.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             angler.setDirection(DcMotorSimple.Direction.FORWARD);
+
+            planeServo.setDirection(Servo.Direction.REVERSE);
 
 
             // Drivetrain motors

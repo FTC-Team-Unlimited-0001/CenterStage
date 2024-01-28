@@ -15,6 +15,7 @@ import org.firstinspires.ftc.teamcode.Util.centerStageMachine;
 public class centerStageTeleop extends LinearOpMode {
     public static double ANGLER_POWER = 0;
     public static double SERVO_POS = 0;
+    public static double PLANE_POS = 0;
     private PIDController controller;
 
     public static double p = 0, i=0, d=0;
@@ -36,6 +37,7 @@ public class centerStageTeleop extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
+            robot.planeServo.setPosition(0);
             //PID and telemetry
             telemetry.addData("microOnePos", robot.microOne.getPosition());
             telemetry.addData("test", robot.angler.getCurrentPosition());
@@ -127,6 +129,20 @@ public class centerStageTeleop extends LinearOpMode {
                 robot.LinearRight.setPower(0);
             }
 
+
+            if(gamepad2.right_bumper){
+                robot.planeServo.setPosition(0.6);
+                Thread.sleep(3000);
+                robot.planeServo.setPosition(0);
+            }
+
+            if(gamepad2.right_stick_button){
+                robot.LinearLeft.setPower(-0.8);
+                robot.LinearRight.setPower(-0.8);
+            }else{
+                robot.LinearLeft.setPower(0);
+                robot.LinearRight.setPower(0);
+            }
 
             if(gamepad2.dpad_left){
                 robot.microOne.setPosition(50);
