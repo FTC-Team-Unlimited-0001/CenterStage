@@ -7,6 +7,7 @@ import com.arcrobotics.ftclib.controller.PIDController;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Util.centerStageMachine;
 
@@ -15,15 +16,12 @@ import org.firstinspires.ftc.teamcode.Util.centerStageMachine;
 public class centerStageTeleop extends LinearOpMode {
     public static double ANGLER_POWER = 0;
     public static double SERVO_POS = 0;
-<<<<<<< HEAD
-=======
     public static double PLANE_POS = 0;
->>>>>>> 2b08aeb0ca0ccf9a553a27c64e2acb6963fb8fd8
     private PIDController controller;
 
-    public static double p = 0, i=0, d=0;
-    public static double f = 0;
-    public static int target = 0;
+    public static double p = 0.0009, i=0, d=0.00042;
+    public static double f = 0.88;
+    public static int target = -1800;
     private final double ticks = 700 / 180.0;
 
     private final FtcDashboard dashboard = FtcDashboard.getInstance();
@@ -40,38 +38,24 @@ public class centerStageTeleop extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-<<<<<<< HEAD
-=======
             robot.planeServo.setPosition(0);
->>>>>>> 2b08aeb0ca0ccf9a553a27c64e2acb6963fb8fd8
             //PID and telemetry
             telemetry.addData("microOnePos", robot.microOne.getPosition());
-            telemetry.addData("test", robot.angler.getCurrentPosition());
-            telemetry.addData("microDongPos", robot.dispense.getPosition());
+            telemetry.addData("dispensePos", robot.dispense.getPosition());
             telemetry.addData("planePos", robot.planeServo.getPosition());
-<<<<<<< HEAD
-=======
-            telemetry.addData("slidePos", robot.LinearRight.getCurrentPosition());
->>>>>>> 2b08aeb0ca0ccf9a553a27c64e2acb6963fb8fd8
             controller.setPID(p, i, d);
             int armPos = robot.angler.getCurrentPosition();
             double pid = controller.calculate(armPos, target);
             double ff = Math.cos(Math.toRadians(target / ticks)) * f;
             double power = pid + ff;
-            robot.angler.setPower(power);
 
             telemetry.addData("armPos", armPos);
             telemetry.addData("target", target);
             telemetry.update();
 
-<<<<<<< HEAD
-=======
-            int slidePos = robot.LinearRight.getCurrentPosition();
 
->>>>>>> 2b08aeb0ca0ccf9a553a27c64e2acb6963fb8fd8
             //initalizing variables
             double servoPower = 0;
-            robot.angler.setPower(ANGLER_POWER);
             robot.dispense.setPosition(SERVO_POS);
 
             //drive
@@ -94,11 +78,6 @@ public class centerStageTeleop extends LinearOpMode {
                 robot.backLeft.setPower(backLeftPower/2);
                 robot.frontRight.setPower(frontRightPower/2);
                 robot.backRight.setPower(backRightPower/2);
-            } else if (gamepad1.right_bumper){
-                robot.frontLeft.setPower(frontLeftPower*2);
-                robot.backLeft.setPower(backLeftPower*2);
-                robot.frontRight.setPower(frontRightPower*2);
-                robot.backRight.setPower(backRightPower*2);
             } else{
                 robot.frontLeft.setPower(frontLeftPower);
                 robot.backLeft.setPower(backLeftPower);
@@ -108,15 +87,15 @@ public class centerStageTeleop extends LinearOpMode {
 
             //intake
             if (gamepad2.a) {
-                robot.intakeServo.setDirection(CRServo.Direction.REVERSE);
+                robot.intakeServo.setDirection(CRServo.Direction.FORWARD);
                 robot.higherIntakeServo.setDirection(CRServo.Direction.FORWARD);
-                robot.thirdIntakeServo.setDirection(CRServo.Direction.FORWARD);
+                robot.thirdIntakeServo.setDirection(CRServo.Direction.REVERSE);
                 servoPower = 0.5;
 
             }else if(gamepad2.b) {
-                robot.intakeServo.setDirection(CRServo.Direction.FORWARD);
+                robot.intakeServo.setDirection(CRServo.Direction.REVERSE);
                 robot.higherIntakeServo.setDirection(CRServo.Direction.REVERSE);
-                robot.thirdIntakeServo.setDirection(CRServo.Direction.REVERSE);
+                robot.thirdIntakeServo.setDirection(CRServo.Direction.FORWARD);
                 servoPower = 0.5;
             }
             if(gamepad2.dpad_up){
@@ -128,49 +107,48 @@ public class centerStageTeleop extends LinearOpMode {
             }
 
             if(gamepad2.dpad_down){
-                robot.LinearLeft.setPower(-0.4);
-                robot.LinearRight.setPower(-0.4);
-<<<<<<< HEAD
+                robot.LinearLeft.setPower(-0.8);
+                robot.LinearRight.setPower(-0.8);
             } else{
-=======
-            }
-            // else if(slidePos < ?) {
-            //       robot.LinearLeft.setPower(0);
-            //       robot.LinearRight.setPower(0);
-            // }
-
-             else{
->>>>>>> 2b08aeb0ca0ccf9a553a27c64e2acb6963fb8fd8
                 robot.LinearLeft.setPower(0);
                 robot.LinearRight.setPower(0);
             }
 
 
-<<<<<<< HEAD
-=======
-            if(gamepad2.right_bumper){
-                robot.planeServo.setPosition(0.6);
-                Thread.sleep(3000);
-                robot.planeServo.setPosition(0);
+
+
+            if (gamepad2.right_bumper){
+                robot.dispense.setPosition(0.8);
+                Thread.sleep(2000);
+                robot.dispense.setPosition(0);
+            }
+            if(gamepad2.x){
+                robot.angler.setPower(power);
+            } else if (gamepad2.y){
+                robot.angler.setPower(1);
+            } else if (gamepad2.left_bumper){
+                robot.angler.setPower(-1);
+            }else {
+                robot.angler.setPower(0);
             }
 
             if(gamepad2.right_stick_button){
-                robot.LinearLeft.setPower(-0.8);
-                robot.LinearRight.setPower(-0.8);
-            }else{
-                robot.LinearLeft.setPower(0);
-                robot.LinearRight.setPower(0);
+                robot.dispense.setPosition(robot.dispense.getPosition()+0.05);
+                Thread.sleep(100);
+                robot.dispense.setPosition(0);
             }
 
->>>>>>> 2b08aeb0ca0ccf9a553a27c64e2acb6963fb8fd8
-            if(gamepad2.dpad_left){
-                robot.microOne.setPosition(50);
+            if(gamepad2.left_stick_button){
+                robot.planeServo.setPosition(0.6);
+                Thread.sleep(1000);
+                robot.planeServo.setPosition(0);
             }
+
 
             //intake power
             robot.intakeServo.setPower(servoPower);
             robot.higherIntakeServo.setPower(servoPower);
             robot.thirdIntakeServo.setPower(servoPower);
-            }
         }
     }
+}
