@@ -31,6 +31,10 @@ public class centerStageMachine {
 
         public DcMotor LinearRight;
 
+<<<<<<< HEAD:TeamCode/src/main/java/org/firstinspires/ftc/teamcode/util/centerStageMachine.java
+=======
+
+>>>>>>> 2b08aeb0ca0ccf9a553a27c64e2acb6963fb8fd8:TeamCode/src/main/java/org/firstinspires/ftc/teamcode/Util/centerStageMachine.java
         HardwareMap hardwareMap;
 
         public centerStageMachine(HardwareMap hwMap){
@@ -66,6 +70,11 @@ public class centerStageMachine {
             angler.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             angler.setDirection(DcMotorSimple.Direction.FORWARD);
 
+<<<<<<< HEAD:TeamCode/src/main/java/org/firstinspires/ftc/teamcode/util/centerStageMachine.java
+=======
+            planeServo.setDirection(Servo.Direction.REVERSE);
+
+>>>>>>> 2b08aeb0ca0ccf9a553a27c64e2acb6963fb8fd8:TeamCode/src/main/java/org/firstinspires/ftc/teamcode/Util/centerStageMachine.java
 
             // Drivetrain motors
             backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);

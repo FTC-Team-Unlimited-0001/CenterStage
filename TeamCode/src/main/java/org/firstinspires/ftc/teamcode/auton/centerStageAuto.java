@@ -40,7 +40,7 @@ public class centerStageAuto extends LinearOpMode {
         waitForStart();
 
         if (opModeIsActive() && !isStopRequested()) {
-            robot.followTrajectory(mytrajectory);
+            robot.followTrajectory(mytrajectory2);
         }
     }
 }

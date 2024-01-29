@@ -15,6 +15,10 @@ import org.firstinspires.ftc.teamcode.Util.centerStageMachine;
 public class centerStageTeleop extends LinearOpMode {
     public static double ANGLER_POWER = 0;
     public static double SERVO_POS = 0;
+<<<<<<< HEAD
+=======
+    public static double PLANE_POS = 0;
+>>>>>>> 2b08aeb0ca0ccf9a553a27c64e2acb6963fb8fd8
     private PIDController controller;
 
     public static double p = 0, i=0, d=0;
@@ -36,11 +40,19 @@ public class centerStageTeleop extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
+<<<<<<< HEAD
+=======
+            robot.planeServo.setPosition(0);
+>>>>>>> 2b08aeb0ca0ccf9a553a27c64e2acb6963fb8fd8
             //PID and telemetry
             telemetry.addData("microOnePos", robot.microOne.getPosition());
             telemetry.addData("test", robot.angler.getCurrentPosition());
             telemetry.addData("microDongPos", robot.dispense.getPosition());
             telemetry.addData("planePos", robot.planeServo.getPosition());
+<<<<<<< HEAD
+=======
+            telemetry.addData("slidePos", robot.LinearRight.getCurrentPosition());
+>>>>>>> 2b08aeb0ca0ccf9a553a27c64e2acb6963fb8fd8
             controller.setPID(p, i, d);
             int armPos = robot.angler.getCurrentPosition();
             double pid = controller.calculate(armPos, target);
@@ -52,6 +64,11 @@ public class centerStageTeleop extends LinearOpMode {
             telemetry.addData("target", target);
             telemetry.update();
 
+<<<<<<< HEAD
+=======
+            int slidePos = robot.LinearRight.getCurrentPosition();
+
+>>>>>>> 2b08aeb0ca0ccf9a553a27c64e2acb6963fb8fd8
             //initalizing variables
             double servoPower = 0;
             robot.angler.setPower(ANGLER_POWER);
@@ -113,12 +130,39 @@ public class centerStageTeleop extends LinearOpMode {
             if(gamepad2.dpad_down){
                 robot.LinearLeft.setPower(-0.4);
                 robot.LinearRight.setPower(-0.4);
+<<<<<<< HEAD
             } else{
+=======
+            }
+            // else if(slidePos < ?) {
+            //       robot.LinearLeft.setPower(0);
+            //       robot.LinearRight.setPower(0);
+            // }
+
+             else{
+>>>>>>> 2b08aeb0ca0ccf9a553a27c64e2acb6963fb8fd8
                 robot.LinearLeft.setPower(0);
                 robot.LinearRight.setPower(0);
             }
 
 
+<<<<<<< HEAD
+=======
+            if(gamepad2.right_bumper){
+                robot.planeServo.setPosition(0.6);
+                Thread.sleep(3000);
+                robot.planeServo.setPosition(0);
+            }
+
+            if(gamepad2.right_stick_button){
+                robot.LinearLeft.setPower(-0.8);
+                robot.LinearRight.setPower(-0.8);
+            }else{
+                robot.LinearLeft.setPower(0);
+                robot.LinearRight.setPower(0);
+            }
+
+>>>>>>> 2b08aeb0ca0ccf9a553a27c64e2acb6963fb8fd8
             if(gamepad2.dpad_left){
                 robot.microOne.setPosition(50);
             }
