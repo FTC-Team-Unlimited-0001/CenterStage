@@ -7,9 +7,8 @@ import com.arcrobotics.ftclib.controller.PIDController;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import org.firstinspires.ftc.teamcode.Util.centerStageMachine;
+import org.firstinspires.ftc.teamcode.util.centerStageMachine;
 
 @Config
 @TeleOp
@@ -74,10 +73,10 @@ public class centerStageTeleop extends LinearOpMode {
 
             //slowmode fastmode normal
             if (gamepad1.left_bumper){
-                robot.frontLeft.setPower(frontLeftPower/2);
-                robot.backLeft.setPower(backLeftPower/2);
-                robot.frontRight.setPower(frontRightPower/2);
-                robot.backRight.setPower(backRightPower/2);
+                robot.frontLeft.setPower(frontLeftPower/4);
+                robot.backLeft.setPower(backLeftPower/4);
+                robot.frontRight.setPower(frontRightPower/4);
+                robot.backRight.setPower(backRightPower/4);
             } else{
                 robot.frontLeft.setPower(frontLeftPower);
                 robot.backLeft.setPower(backLeftPower);
@@ -90,25 +89,25 @@ public class centerStageTeleop extends LinearOpMode {
                 robot.intakeServo.setDirection(CRServo.Direction.FORWARD);
                 robot.higherIntakeServo.setDirection(CRServo.Direction.FORWARD);
                 robot.thirdIntakeServo.setDirection(CRServo.Direction.REVERSE);
-                servoPower = 0.5;
+                servoPower = 1;
 
             }else if(gamepad2.b) {
                 robot.intakeServo.setDirection(CRServo.Direction.REVERSE);
                 robot.higherIntakeServo.setDirection(CRServo.Direction.REVERSE);
                 robot.thirdIntakeServo.setDirection(CRServo.Direction.FORWARD);
-                servoPower = 0.5;
+                servoPower = 1;
             }
             if(gamepad2.dpad_up){
-                robot.LinearLeft.setPower(0.8);
-                robot.LinearRight.setPower(0.8);
+                robot.LinearLeft.setPower(1);
+                robot.LinearRight.setPower(1);
             } else{
                 robot.LinearLeft.setPower(0);
                 robot.LinearRight.setPower(0);
             }
 
             if(gamepad2.dpad_down){
-                robot.LinearLeft.setPower(-0.8);
-                robot.LinearRight.setPower(-0.8);
+                robot.LinearLeft.setPower(-0.3);
+                robot.LinearRight.setPower(-0.3);
             } else{
                 robot.LinearLeft.setPower(0);
                 robot.LinearRight.setPower(0);

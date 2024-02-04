@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Util;
+package org.firstinspires.ftc.teamcode.util;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -18,7 +18,7 @@ public class centerStageMachine {
     public DcMotor frontLeft;
     public DcMotor backRight;
     public DcMotor backLeft;
-    public DcMotorEx angler;
+    public DcMotor angler;
     public CRServo intakeServo;
     public CRServo higherIntakeServo;
     public CRServo thirdIntakeServo;
@@ -33,9 +33,10 @@ public class centerStageMachine {
 
     HardwareMap hardwareMap;
 
-    public centerStageMachine(HardwareMap hwMap){
+    public centerStageMachine(HardwareMap hwMap) {
         initialize(hwMap);
     }
+
     private void initialize(HardwareMap hwMap) {
         hardwareMap = hwMap;
 
