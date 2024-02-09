@@ -41,7 +41,6 @@ public class opencv extends LinearOpMode {
     public static int sleep5 = 500;
     public static int sleep6 = 200;
     public static int sleep7 = 300;
-    int mode = 0;
 
     public static int r1 = 110;
     public static int r2 = 125;
@@ -61,6 +60,7 @@ public class opencv extends LinearOpMode {
     @Override
     public void runOpMode() {
         robot = new centerStageMachine(hardwareMap);
+        int mode = 0;
 
         initOpenCV();
         FtcDashboard dashboard = FtcDashboard.getInstance();
@@ -78,7 +78,6 @@ public class opencv extends LinearOpMode {
                 controlHubCam.stopStreaming();
                 cX=0;
                 cY=0;
-
             } else {
                 telemetry.addData("location", "unknown");
                 robot.backRight.setPower(0);
@@ -86,73 +85,6 @@ public class opencv extends LinearOpMode {
                 robot.frontRight.setPower(0);
                 robot.frontLeft.setPower(0);
             }
-
-            if (mode == 1){
-                robot.backRight.setPower(0.4);
-                robot.backLeft.setPower(0.3);
-                robot.frontRight.setPower(0.4);
-                robot.frontLeft.setPower(0.3);
-                sleep(sleep1);
-                robot.backRight.setPower(0);
-                robot.backLeft.setPower(0);
-                robot.frontRight.setPower(0);
-                robot.frontLeft.setPower(0);
-                robot.intakeServo.setPower(0);
-                robot.higherIntakeServo.setPower(0);
-                robot.thirdIntakeServo.setPower(0);
-                robot.intakeServo.setDirection(CRServo.Direction.REVERSE);
-                robot.higherIntakeServo.setDirection(CRServo.Direction.REVERSE);
-                robot.thirdIntakeServo.setDirection(CRServo.Direction.FORWARD);
-                robot.intakeServo.setPower(1);
-                robot.higherIntakeServo.setPower(1);
-                robot.thirdIntakeServo.setPower(1);
-                sleep(sleep2);
-                robot.intakeServo.setPower(0);
-                robot.higherIntakeServo.setPower(0);
-                robot.thirdIntakeServo.setPower(0);
-                robot.backRight.setPower(-0.5);
-                robot.backLeft.setPower(0.5);
-                robot.frontRight.setPower(-0.5);
-                robot.frontLeft.setPower(0.5);
-                sleep(sleep3);
-                robot.backRight.setPower(-0.55);
-                robot.backLeft.setPower(-0.5);
-                robot.frontRight.setPower(-0.55);
-                robot.frontLeft.setPower(-0.5);
-                sleep(sleep4);
-                robot.backRight.setPower(-0.3);
-                robot.backLeft.setPower(0.3);
-                robot.frontRight.setPower(0.3);
-                robot.frontLeft.setPower(-0.3);
-                sleep(sleep5);
-                robot.backRight.setPower(0);
-                robot.backLeft.setPower(0);
-                robot.frontRight.setPower(0);
-                robot.frontLeft.setPower(0);
-                robot.angler.setPower(1);
-                sleep(sleep6);
-                robot.LinearRight.setPower(1);
-                robot.LinearLeft.setPower(1);
-                sleep(sleep7);
-                robot.LinearRight.setPower(0);
-                robot.LinearLeft.setPower(0);
-                robot.dispense.setPosition(0.8);
-                sleep(1000);
-                robot.dispense.setPosition(0);
-                mode = 4;
-            } else if (mode == 4){
-                robot.angler.setPower(0);
-                robot.backRight.setPower(0);
-                robot.backLeft.setPower(0);
-                robot.frontRight.setPower(0);
-                robot.frontLeft.setPower(0);
-                robot.intakeServo.setPower(0);
-                robot.higherIntakeServo.setPower(0);
-                robot.thirdIntakeServo.setPower(0);
-                robot.LinearRight.setPower(0);
-                robot.LinearLeft.setPower(0);
-            }
-
             telemetry.update();
 
 

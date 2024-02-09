@@ -32,6 +32,8 @@ public class centerStageMachine {
     public DcMotor LinearRight;
 
     HardwareMap hardwareMap;
+    double ticks = 2786.2;
+    double newTarget;
 
     public centerStageMachine(HardwareMap hwMap) {
         initialize(hwMap);
@@ -80,5 +82,18 @@ public class centerStageMachine {
 
         angler.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+    }
+    public void anglerEncoder(int turnage, double power){
+        newTarget = ticks / turnage;
+        angler.setTargetPosition((int)newTarget);
+        angler.setPower(power);
+        angler.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+    }
+
+    public void resetAngler(){
+        angler.setTargetPosition(0);
+        angler.setPower(0.8);
+        angler.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 }

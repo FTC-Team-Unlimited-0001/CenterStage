@@ -18,7 +18,7 @@ public class centerStageTeleop extends LinearOpMode {
     public static double PLANE_POS = 0;
     private PIDController controller;
 
-    public static double p = 0.0009, i=0, d=0.00042;
+    public static double p = 0, i=0, d=0;
     public static double f = 0.88;
     public static int target = -1800;
     private final double ticks = 700 / 180.0;
@@ -39,7 +39,6 @@ public class centerStageTeleop extends LinearOpMode {
         while (opModeIsActive()) {
             robot.planeServo.setPosition(0);
             //PID and telemetry
-            telemetry.addData("microOnePos", robot.microOne.getPosition());
             telemetry.addData("dispensePos", robot.dispense.getPosition());
             telemetry.addData("planePos", robot.planeServo.getPosition());
             controller.setPID(p, i, d);
@@ -84,28 +83,10 @@ public class centerStageTeleop extends LinearOpMode {
                 robot.backRight.setPower(backRightPower);
             }
 
-            //intake
-            if (gamepad2.a) {
-                robot.intakeServo.setDirection(CRServo.Direction.FORWARD);
-                robot.higherIntakeServo.setDirection(CRServo.Direction.FORWARD);
-                robot.thirdIntakeServo.setDirection(CRServo.Direction.REVERSE);
-                servoPower = 1;
-
-            }else if(gamepad2.b) {
-                robot.intakeServo.setDirection(CRServo.Direction.REVERSE);
-                robot.higherIntakeServo.setDirection(CRServo.Direction.REVERSE);
-                robot.thirdIntakeServo.setDirection(CRServo.Direction.FORWARD);
-                servoPower = 1;
-            }
             if(gamepad2.dpad_up){
                 robot.LinearLeft.setPower(1);
                 robot.LinearRight.setPower(1);
-            } else{
-                robot.LinearLeft.setPower(0);
-                robot.LinearRight.setPower(0);
-            }
-
-            if(gamepad2.dpad_down){
+            } else if(gamepad2.dpad_down){
                 robot.LinearLeft.setPower(-0.3);
                 robot.LinearRight.setPower(-0.3);
             } else{
@@ -113,41 +94,17 @@ public class centerStageTeleop extends LinearOpMode {
                 robot.LinearRight.setPower(0);
             }
 
-
-
-
             if (gamepad2.right_bumper){
                 robot.dispense.setPosition(0.8);
-                Thread.sleep(2000);
-                robot.dispense.setPosition(0);
-            }
-            if(gamepad2.x){
-                robot.angler.setPower(power);
-            } else if (gamepad2.y){
-                robot.angler.setPower(1);
-            } else if (gamepad2.left_bumper){
-                robot.angler.setPower(-1);
-            }else {
-                robot.angler.setPower(0);
-            }
-
-            if(gamepad2.right_stick_button){
-                robot.dispense.setPosition(robot.dispense.getPosition()+0.05);
-                Thread.sleep(100);
+                Thread.sleep(1000);
                 robot.dispense.setPosition(0);
             }
 
             if(gamepad2.left_stick_button){
                 robot.planeServo.setPosition(0.6);
-                Thread.sleep(1000);
+                Thread.sleep(10);
                 robot.planeServo.setPosition(0);
             }
-
-
-            //intake power
-            robot.intakeServo.setPower(servoPower);
-            robot.higherIntakeServo.setPower(servoPower);
-            robot.thirdIntakeServo.setPower(servoPower);
         }
     }
 }
